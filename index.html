@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Frosty Happy Drinks</title>
+
+<style>
+html { scroll-behavior: smooth; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg,#e0fff7,#ffffff);
+    color:    #134e4a;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg,#c2f6ff,#e7fdff);
+    color: rgb(0, 0, 0);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo { font-size: 22px; font-weight: bold; letter-spacing:1px; }
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.menu a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    position: relative;
+    font-weight:600;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: #ffffff;
+    left: 0;
+    bottom: -6px;
+    transition: .3s;
+}
+
+.menu a:hover::after { width: 100%; }
+
+/* ===== HEADER ===== */
+header {
+    height: 100vh;
+    background:
+      linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)),
+      url("images/fondo.png");;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding-top: 230px;
+}
+
+header h1 {
+    font-size: 60px;
+    text-shadow: 0 4px 15px rgba(0,0,0,.4);
+}
+header p {
+    margin: 18px 0;
+    font-size: 20px;
+}
+
+.btn {
+    background: linear-gradient(45deg,#9ed2dc,#78e7e5);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-weight:600;
+}
+
+/* 🔥 BOTÓN PEDIR YA */
+.btn-header {
+    margin-top: 35px;
+    font-size: 20px;
+    padding: 16px 45px;
+    box-shadow: 0 15px 30px rgba(0,0,0,.35);
+    transition: transform .3s, box-shadow .3s;
+}
+
+.btn-header:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,.45);
+}
+
+/* ===== SECCIONES ===== */
+section {
+    padding: 90px 40px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 38px;
+    margin-bottom: 35px;
+    color:#61898b;
+}
+
+/* ===== VALORES ===== */
+.valores {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.valor {
+    background: white;
+    padding: 35px 25px;
+    width: 260px;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0,0,0,.12);
+}
+
+/* ===== PRODUCTOS ===== */
+.productos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: linear-gradient(180deg,#ffffff,#f0fffa);
+    padding: 28px;
+    width: 235px;
+    border-radius: 30px;
+    transition: transform .3s;
+    box-shadow: 0 15px 25px rgba(0,0,0,.12);
+}
+
+.card:hover { transform: translateY(-10px) rotate(-1deg); }
+
+.card span {
+    display: inline-block;
+    margin: 12px 0;
+    font-weight: bold;
+    color: #000000;
+    background:#ffffff;
+    padding:5px 14px;
+    border-radius:20px;
+}
+
+/* ===== CARRITO ===== */
+.boton-carrito {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(45deg,#d9d9d9,#d9d9d9);
+    color: white;
+    font-size: 22px;
+    padding: 15px;  
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.carrito {
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    background: white;
+    width: 330px;
+    padding: 22px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25);
+    display: none;
+}
+
+.carrito ul { list-style: none; margin: 15px 0; }
+.carrito li { margin-bottom: 8px; font-size: 14px; }
+.eliminar { color: red; cursor: pointer; margin-left: 8px; }
+
+/* ===== GALERÍA ===== */
+.imagenes {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.imagenes img {
+    width: 270px;
+    border-radius: 25px;
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+/* ===== TESTIMONIOS ===== */
+.testimonios {
+    background: linear-gradient(90deg,#81cad8,#80d8e0);
+    color: white;
+}
+
+/* ===== WHATSAPP ===== */
+.whatsapp {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: #25d366;
+    color: white;
+    font-size: 25px;
+    padding: 15px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #68c2c2;
+    color: white;
+    text-align: center;
+    padding: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">Frosty Happy Drinks</div>
+    <ul class="menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#menu">Sabores</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<header id="inicio">
+    <h1>Fiesta tropical en cada sorbo</h1>
+    <p>Cremoladas con licor · Frescas · Tropicales</p>
+
+    <a href="#menu">
+        <button class="btn btn-header">¡Pedir ya!</button>
+    </a>
+</header>
+
+<section class="valores">
+    <div class="valor"><h3>🌴 Tropical</h3><p>Sabores caribeños.</p></div>
+    <div class="valor"><h3>🍸 Con Licor</h3><p>Para la fiesta.</p></div>
+    <div class="valor"><h3>❄️ Refrescante</h3><p>Ideal para el calor.</p></div>
+</section>
+
+<section id="menu">
+<h2>Nuestros Sabores +18</h2>
+
+<div class="productos">
+    <div class="card"><h4>Fresa + Ron</h4><p>Dulce</p><span>S/ 12.00</span><button class="btn" onclick="agregar('Fresa + Ron',12)">Agregar</button></div>
+    <div class="card"><h4>Mango + Vodka</h4><p>Tropical</p><span>S/ 13.00</span><button class="btn" onclick="agregar('Mango + Vodka',13)">Agregar</button></div>
+    <div class="card"><h4>Maracuyá + Pisco</h4><p>Ácido</p><span>S/ 14.00</span><button class="btn" onclick="agregar('Maracuyá + Pisco',14)">Agregar</button></div>
+    <div class="card"><h4>Piña + Ron</h4><p>Caribeño</p><span>S/ 13.50</span><button class="btn" onclick="agregar('Piña + Ron',13.5)">Agregar</button></div>
+    <div class="card"><h4>Fresa + Vodka</h4><p>Dulce y potente</p><span>S/ 18.00</span><button class="btn" onclick="agregar('Fresa Vodka',18)">Agregar</button></div>
+    <div class="card"><h4>Mango + Ron</h4><p>Tropical intenso</p><span>S/ 19.00</span><button class="btn" onclick="agregar('Mango Ron',19)">Agregar</button></div>
+    <div class="card"><h4>Maracuyá + Pisco</h4><p>Ácido balanceado</p><span>S/ 20.00</span><button class="btn" onclick="agregar('Maracuyá Pisco',20)">Agregar</button></div>
+    <div class="card"><h4>Piña + Tequila</h4><p>Fuerte y caribeño</p><span>S/ 21.00</span><button class="btn" onclick="agregar('Piña Tequila',21)">Agregar</button></div>
+    <div class="card"><h4>Limón + Vodka</h4><p>Cítrico extremo</p><span>S/ 18.50</span><button class="btn" onclick="agregar('Limón Vodka',18.5)">Agregar</button></div>
+    <div class="card"><h4>Sandía + Gin</h4><p>Refrescante premium</p><span>S/ 20.50</span><button class="btn" onclick="agregar('Sandía Gin',20.5)">Agregar</button></div>
+    <div class="card"><h4>Blue + Curaçao</h4><p>Dulce exótico</p><span>S/ 22.00</span><button class="btn" onclick="agregar('Blue Curaçao',22)">Agregar</button></div>
+    <div class="card"><h4>Coco + Malibu</h4><p>Cremoso tropical</p><span>S/ 21.50</span><button class="btn" onclick="agregar('Coco Malibu',21.5)">Agregar</button></div>
+    <div class="card"><h4>Uva + Borgoña</h4><p>Dulce clásico</p><span>S/ 19.50</span><button class="btn" onclick="agregar('Uva Borgoña',19.5)">Agregar</button></div>
+    <div class="card"><h4>Frutos + Rojos Gin</h4><p>Aromático premium</p><span>S/ 22.50</span><button class="btn" onclick="agregar('Frutos Rojos Gin',22.5)">Agregar</button></div>
+    <div class="card"><h4>Frutos + Vodka</h4><p>Aromático</p><span>S/ 20.50</span><button class="btn" onclick="agregar('Frutos Rojos Gin',22.5)">Agregar</button></div>
+    <div class="card">
+    <h4>¿Tienes otro sabor en mente?</h4>
+    <p>Escríbenos y cuéntanos tu idea</p>
+    <span>¡Lo preparamos para ti!</span>
+    <a href="https://wa.me/51942664177" target="_blank">
+        <button class="btn">Escribir ahora</button>
+    </a>
+</div>
+
+</div>
+</section>
+
+<section id="galeria">
+<h2>Galería Frosty</h2>
+<div class="imagenes">
+<img src="https://comidasperuanas.net/wp-content/uploads/2020/11/Cremolada-peruana-casera.jpg">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuFHSir792duNcBdBi-7ZxzeS_HpYFY0J8zg&s">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjvuqNqls8P6MtRvraXvuUBl8_GgPOufQ-TQ&s">
+</div>
+</section>
+
+<section id="menu">
+<h2>Nuestros Sabores Kids</h2>
+
+<div class="productos">
+    <div class="card"><h4>Fresa</h4><p>Dulce</p><span>S/ 12.00</span><button class="btn" onclick="agregar('Fresa',12)">Agregar</button></div>
+    <div class="card"><h4>Mango</h4><p>Tropical</p><span>S/ 13.00</span><button class="btn" onclick="agregar('Mango',13)">Agregar</button></div>
+    <div class="card"><h4>Maracuyá</h4><p>Ácido</p><span>S/ 14.00</span><button class="btn" onclick="agregar('Maracuyá',14)">Agregar</button></div>
+    <div class="card"><h4>Piña</h4><p>Caribeño</p><span>S/ 13.50</span><button class="btn" onclick="agregar('Piña',13.5)">Agregar</button></div>
+    <div class="card"><h4>Sandía</h4><p>Refrescante</p><span>S/ 12.50</span><button class="btn" onclick="agregar('Sandía',12.5)">Agregar</button></div>
+    <div class="card"><h4>Limón Frozen</h4><p>Intenso</p><span>S/ 11.50</span><button class="btn" onclick="agregar('Limón Frozen',11.5)">Agregar</button></div>
+    <div class="card"><h4>Frutos Rojos</h4><p>Balanceado</p><span>S/ 15.00</span><button class="btn" onclick="agregar('Frutos Rojos',15)">Agregar</button></div>
+    <div class="card"><h4>Durazno</h4><p>Suave</p><span>S/ 13.00</span><button class="btn" onclick="agregar('Durazno',13)">Agregar</button></div>
+    <div class="card"><h4>Piña Colada</h4><p>Cremoso</p><span>S/ 16.00</span><button class="btn" onclick="agregar('Piña Colada',16)">Agregar</button></div>
+    <div class="card"><h4>Chicha Morada</h4><p>Tradicional</p><span>S/ 12.00</span><button class="btn" onclick="agregar('Chicha Morada',12)">Agregar</button></div>
+    <div class="card"><h4>Coco</h4><p>Tropical suave</p><span>S/ 14.50</span><button class="btn" onclick="agregar('Coco',14.5)">Agregar</button></div>
+    <div class="card"><h4>Naranja Sunset</h4><p>Cítrico</p><span>S/ 12.50</span><button class="btn" onclick="agregar('Naranja Sunset',12.5)">Agregar</button></div>
+    <div class="card"><h4>Uva Ice</h4><p>Dulce intenso</p><span>S/ 13.50</span><button class="btn" onclick="agregar('Uva Ice',13.5)">Agregar</button></div>
+    <div class="card"><h4>Blue Lagoon</h4><p>Exótico</p><span>S/ 17.00</span><button class="btn" onclick="agregar('Blue Lagoon',17)">Agregar</button></div>
+    <div class="card"><h4>Uva</h4><p>Lleno de sabor</p><span>S/ 17.00</span><button class="btn" onclick="agregar('Blue Lagoon',17)">Agregar</button></div>
+    <div class="card">
+    <h4>¿Tienes otro sabor en mente?</h4>
+    <p>Escríbenos y cuéntanos tu idea</p>
+    <span>¡Lo preparamos para ti!</span>
+    <a href="https://wa.me/51942664177" target="_blank">
+        <button class="btn">Escribir ahora</button>
+    </a>
+</div>
+</section>
+
+<section id="contacto">
+<h2>Contacto</h2>
+<p>📍 San Martin, Perú</p>
+<p>📞 +51 942 664 177</p>
+</section>
+
+<a href="https://wa.me/51942664177" class="whatsapp">💬</a>
+
+<div class="boton-carrito" onclick="toggleCarrito()">🛒</div>
+
+<div class="carrito" id="carrito">
+<h3>Tu pedido</h3>
+<ul id="lista"></ul>
+<p><strong>Total:</strong> S/ <span id="total">0</span></p>
+<button class="btn" onclick="enviar()">Pedir por WhatsApp</button>
+</div>
+
+<footer>© 2026 Frosty Happy Drinks</footer>
+
+<script>
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+function agregar(nombre, precio) {
+    const item = carrito.find(p => p.nombre === nombre);
+    item ? item.cantidad++ : carrito.push({nombre, precio, cantidad:1});
+    guardar(); render();
+}
+
+function eliminar(nombre) {
+    carrito = carrito.filter(p => p.nombre !== nombre);
+    guardar(); render();
+}
+
+function render() {
+    const lista = document.getElementById("lista");
+    const totalSpan = document.getElementById("total");
+    lista.innerHTML = "";
+    let total = 0;
+
+    carrito.forEach(p => {
+        total += p.precio * p.cantidad;
+        lista.innerHTML += `<li>${p.nombre} x${p.cantidad} - S/ ${p.precio*p.cantidad}
+        <span class="eliminar" onclick="eliminar('${p.nombre}')">❌</span></li>`;
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+}
+
+function toggleCarrito() {
+    const c = document.getElementById("carrito");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+}
+
+function enviar() {
+    if (!carrito.length) return alert("Carrito vacío");
+    let msg = "Hola, quisiera pedir:%0A";
+    carrito.forEach(p => msg += `- ${p.nombre} x${p.cantidad}%0A`);
+    msg += `%0ATotal: S/ ${document.getElementById("total").textContent}`;
+    window.open("https://wa.me/51942664177?text="+msg,"_blank");
+}
+
+function guardar() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+render();
+</script>
+
+</body>
+</html>
